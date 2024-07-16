@@ -28,22 +28,23 @@ const Postsc2 = () => {
   const [showAnime, setAnime] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const fetchData = async () => {
+    try {
+      const result1 = await axios.get(`${window.location.origin}/posts`);
+      //console.log(result.data);
+      setPosts(result1.data);
+      const result2 = await axios.get(`${window.location.origin}/replies`);
+      //console.log(result2.data);
+      setReplies(result2.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result1 = await axios.get(`${window.location.origin}/posts`);
-        //console.log(result.data);
-        setPosts(result1.data);
-        const result2 = await axios.get(`${window.location.origin}/replies`);
-        console.log(result2.data);
-        setReplies(result2.data);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchData();
-  }, [posts, replies]);
+  }, []);
 
   const sendReply = async () => {
     try {
