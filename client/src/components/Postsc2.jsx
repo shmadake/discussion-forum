@@ -55,6 +55,7 @@ const Postsc2 = () => {
       //console.log(result.data);
       setReply("");
       setReplyModal(false);
+      await fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +64,7 @@ const Postsc2 = () => {
   const deleteReply = async (replyId) => {
     try {
       await axios.delete(`${window.location.origin}/replies/delete/${replyId}`);
+      await fetchData();
     } catch (error) {
       console.log(error);
     }
@@ -71,6 +73,7 @@ const Postsc2 = () => {
   const deletePost = async (postId) => {
     try {
       await axios.delete(`${window.location.origin}/posts/delete/${postId}`);
+      await fetchData();
       //console.log(result.data);
     } catch (error) {
       console.log(error);
@@ -81,6 +84,7 @@ const Postsc2 = () => {
     try {
       await axios.put(`${window.location.origin}/posts/edit/${editId}`, edit);
       setEditModal(false);
+      await fetchData();
     } catch (error) {
       console.log(error);
     }
